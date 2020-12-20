@@ -4,7 +4,7 @@ const AquariumSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please add an aquarium"],
+      required: [true, "Please add a name"],
       trim: true,
       maxlength: [50, "Name cannot be more than 50 characters"],
     },
@@ -41,8 +41,12 @@ const AquariumSchema = new mongoose.Schema(
     },
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: "User",
+      ref: "user",
       required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
     },
   },
   {
