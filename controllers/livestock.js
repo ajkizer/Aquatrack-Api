@@ -20,11 +20,7 @@ exports.getLivestock = asyncHandler(async (req, res, next) => {
       data: livestock,
     });
   } else {
-    livestock = await Livestock.find({ user: req.user.id });
-    return res.status(200).json({
-      success: true,
-      data: livestock,
-    });
+    res.status(200).json(res.advancedResults);
   }
 });
 

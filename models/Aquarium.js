@@ -21,6 +21,10 @@ const AquariumSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    isSaltwater: {
+      type: Boolean,
+      default: false,
+    },
     waterchangeReminder: {
       type: Number,
       default: 7,
@@ -32,6 +36,14 @@ const AquariumSchema = new mongoose.Schema(
       default: 7,
       min: 1,
       max: 30,
+    },
+    lastWaterchange: {
+      date: {
+        type: Date,
+      },
+      percentChange: {
+        type: Number,
+      },
     },
     generalMaintenanceReminder: {
       type: Number,
@@ -61,4 +73,5 @@ AquariumSchema.virtual("livestock", {
   foreignField: "aquarium",
   justOne: false,
 });
+
 module.exports = mongoose.model("Aquarium", AquariumSchema);

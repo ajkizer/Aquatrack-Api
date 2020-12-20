@@ -7,12 +7,7 @@ const Aquarium = require("../models/Aquarium");
 //@access   Private
 
 exports.getAquariums = asyncHandler(async (req, res, next) => {
-  const aquariums = await Aquarium.find({ user: req.user.id });
-  res.status(200).json({
-    success: true,
-    count: aquariums.length,
-    data: aquariums,
-  });
+  res.status(200).json(res.advancedResults);
 });
 
 //@desc     Get single aquarium
@@ -20,7 +15,10 @@ exports.getAquariums = asyncHandler(async (req, res, next) => {
 //@access   Private
 
 exports.getSingleAquarium = asyncHandler(async (req, res, next) => {
-  const aquarium = await Aquarium.findById(req.params.id);
+  const aquarium = await Aquarium.findById(req.params.id).populate({
+    path: "livestock",
+    select: "name quantity price",
+  });
 
   if (req.user.id !== aquarium.user.toString()) {
     return next(

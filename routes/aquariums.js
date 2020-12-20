@@ -8,16 +8,23 @@ const {
   deleteAquarium,
 } = require("../controllers/aquariums");
 
+const advancedResults = require("../middleware/advancedResults");
+
 const Aquarium = require("../models/Aquarium");
 const router = express.Router();
 
 const livestockRouter = require("./livestock");
+const waterchangesRouter = require("./waterchanges");
 
 const { protect } = require("../middleware/auth");
 
 router.use("/:aquariumId/livestock", livestockRouter);
+router.use("/:aquariumId/waterchanges", waterchangesRouter);
 
-router.route("/").get(protect, getAquariums).post(protect, createAquarium);
+router
+  .route("/")
+  .get(protect, advancedResults(Aquarium, "livestock"), getAquariums)
+  .post(protect, createAquarium);
 router
   .route("/:id")
   .get(protect, getSingleAquarium)

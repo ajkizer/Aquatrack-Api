@@ -16,6 +16,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const aquariums = require("./routes/aquariums");
 const auth = require("./routes/auth");
 const livestock = require("./routes/livestock");
+const waterchanges = require("./routes/waterchanges");
 // const users = require("./routes/users");
 // const reviews = require("./routes/reviews");
 
@@ -75,6 +76,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/aquariums", aquariums);
 app.use("/api/v1/livestock", livestock);
+app.use("/api/v1/waterchanges", waterchanges);
 // app.use("/api/v1/users", users);
 // app.use("/api/v1/reviews", reviews);
 app.use(errorHandler);
