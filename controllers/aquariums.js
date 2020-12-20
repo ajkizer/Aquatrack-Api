@@ -23,12 +23,17 @@ exports.getSingleAquarium = asyncHandler(async (req, res, next) => {
   const aquarium = await Aquarium.findById(req.params.id);
 
   if (req.user.id !== aquarium.user.toString()) {
-    return next(new ErrorResponse(`Aquarium does not belong to this user`));
+    return next(
+      new ErrorResponse(`Aquarium does not belong to this user`, 401)
+    );
   }
 
   if (!aquarium) {
     return next(
-      new ErrorResponse(`Aquarium not found with the id of ${req.params.id}`)
+      new ErrorResponse(
+        `Aquarium not found with the id of ${req.params.id}`,
+        404
+      )
     );
   }
 
@@ -44,4 +49,28 @@ exports.createAquarium = asyncHandler(async (req, res, next) => {
   const aquarium = await Aquarium.create(req.body);
 
   res.status(201).json({ success: true, data: aquarium });
+});
+
+//@desc     Update Aquarium
+//@route    PUT /api/v1/aquariums/:id
+//@access   Private
+
+exports.updateAquarium = asyncHandler(async (req, res, next) => {
+  let aquarium = await Aquarium.findById(req.params.id);
+
+  if (!aquarium) {
+    return next(
+      new ErrorResponse(
+        `Aquarium not found with the id of ${req.params.id}`,
+        404
+      )
+    );
+  }
+
+  aquarium = await Aquarium.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ success: true, data: aquarium });
 });
