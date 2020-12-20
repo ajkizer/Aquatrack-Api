@@ -67,10 +67,40 @@ exports.updateAquarium = asyncHandler(async (req, res, next) => {
     );
   }
 
+  if (req.user.id !== aquarium.user.toString()) {
+    return next(
+      new ErrorResponse(`Aquarium does not belong to this user`, 401)
+    );
+  }
+
   aquarium = await Aquarium.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
 
   res.status(200).json({ success: true, data: aquarium });
+});
+
+//@desc     Delete Aquarium
+//@route    DELETE /api/v1/aquariums/:id
+//@access   Private
+
+exports.deleteAquarium = asyncHandler(async (req, res, next) => {
+  const aquarium = await Aquarium.findById(req.params.id);
+
+  if (!aquarium) {
+    return next(
+      new ErrorResponse(`Aquarium not found with the id of ${req.params.id}`),
+      404
+    );
+  }
+
+  if (req.user.id !== aquarium.user.toString()) {
+    return next(
+      new ErrorResponse(`Aquarium does not belong to this user`, 401)
+    );
+  }
+  aquarium.remove();
+
+  res.status(200).json({ success: true, data: {} });
 });

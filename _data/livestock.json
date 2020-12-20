@@ -1,0 +1,31 @@
+[
+    {
+    "name": "Neon Tetra",
+    "description": "Large neon tetras",
+    "quantity": 7,
+    "price": 0.99,
+    "breeding": true,
+    "quarantine": false,
+    "aquarium": "5d725a4a7b292f5f8ceff779",
+    "user": "5d7a514b5d2c12c7449be044"
+    },
+    {"name": "Black Neon Tetra",
+    "description": "Large black neon tetras",
+    "quantity": 7,
+    "price": 1.99,
+    "breeding": true,
+    "quarantine": false,
+    "aquarium": "5d725a4a7b292f5f8ceff779",
+    "user": "5d7a514b5d2c12c7449be044"
+    },
+    {
+        "name": "Red Betta",
+        "description": "Male Red Betta",
+        "quantity": 3,
+        "price": 1.99,
+        "breeding": true,
+        "quarantine": false,
+        "aquarium": "5d725a4a7b292f5f8ceff789",
+        "user": "5d7a514b5d2c12c7449be044"
+    }
+]

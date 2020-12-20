@@ -33,7 +33,7 @@ const AquariumSchema = new mongoose.Schema(
       min: 1,
       max: 30,
     },
-    plantTrimReminder: {
+    generalMaintenanceReminder: {
       type: Number,
       default: 7,
       min: 1,
@@ -55,4 +55,10 @@ const AquariumSchema = new mongoose.Schema(
   }
 );
 
+AquariumSchema.virtual("livestock", {
+  ref: "Livestock",
+  localField: "_id",
+  foreignField: "aquarium",
+  justOne: false,
+});
 module.exports = mongoose.model("Aquarium", AquariumSchema);
