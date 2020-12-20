@@ -1,0 +1,34 @@
+[{
+    "_id": "5d725a4a7b292f5f8ceff779",
+    "name": "Red's tank",
+    "description": "Betta Tank with a variety of ramshorn snails. Located in fish room 1",
+    "size": 8,
+    "isPlanted": true,
+    "waterchangeReminder": 5,
+    "parameterCheckReminder": 5,
+    "plantTrimReminder": 7,
+    "user": "5d7a514b5d2c12c7449be044"
+},
+{
+    "_id": "5d725a4a7b292f5f8ceff789",
+    "name": "Blue's tank",
+    "description": "Betta Tank with a variety of mystery snails. Located in fish room 2",
+    "size": 8,
+    "isPlanted": true,
+    "waterchangeReminder": 5,
+    "parameterCheckReminder": 5,
+    "plantTrimReminder": 7,
+    "user": "5d7a514b5d2c12c7449be044"
+},
+
+{
+    "_id": "5d725a4a7b292f5f8ceff799",
+    "name": "Whites's tank",
+    "description": "Betta Tank with a variety of malaysian trumpet snails. Located in fish room 1",
+    "size": 8,
+    "isPlanted": true,
+    "waterchangeReminder": 5,
+    "parameterCheckReminder": 5,
+    "plantTrimReminder": 7,
+    "user": "5d7a514b5d2c12c7449be044"
+}]
