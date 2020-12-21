@@ -1,0 +1,25 @@
+[
+    {
+    "name": "Amazon Sword",
+    "description": "Large Amazon Sword",
+    "quantity": 7,
+    "price": 5.99,
+    "aquarium": "5d725a4a7b292f5f8ceff779",
+    "user": "5d7a514b5d2c12c7449be044"
+    },
+    {"name": "Rotala",
+    "description": "Large rotala",
+    "quantity": 7,
+    "price": 1.99,
+    "aquarium": "5d725a4a7b292f5f8ceff779",
+    "user": "5d7a514b5d2c12c7449be044"
+    },
+    {
+        "name": "Dwarf Hair Grass",
+        "description": "Dwarf hair grass patch",
+        "quantity": 3,
+        "price": 1.99,
+        "aquarium": "5d725a4a7b292f5f8ceff789",
+        "user": "5d7a514b5d2c12c7449be044"
+    }
+]

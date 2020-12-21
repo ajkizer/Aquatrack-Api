@@ -1,7 +1,7 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/asyncHandler");
 const Aquarium = require("../models/Aquarium");
-const Waterchange = require("../models/Waterchanges");
+const Waterchange = require("../models/Waterchange");
 
 //@desc     Get all waterchanges
 //@route    GET /api/v1/waterchanges

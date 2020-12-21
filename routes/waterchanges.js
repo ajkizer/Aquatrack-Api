@@ -9,7 +9,7 @@ const {
 
 const { protect } = require("../middleware/auth");
 
-const Waterchange = require("../models/Waterchanges");
+const Waterchange = require("../models/Waterchange");
 
 const router = express.Router({ mergeParams: true });
 

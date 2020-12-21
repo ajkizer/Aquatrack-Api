@@ -15,11 +15,13 @@ const router = express.Router();
 
 const livestockRouter = require("./livestock");
 const waterchangesRouter = require("./waterchanges");
+const plantsRouter = require("./plants");
 
 const { protect } = require("../middleware/auth");
 
 router.use("/:aquariumId/livestock", livestockRouter);
 router.use("/:aquariumId/waterchanges", waterchangesRouter);
+router.use("/:aquariumId/plants", plantsRouter);
 
 router
   .route("/")
