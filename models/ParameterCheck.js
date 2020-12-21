@@ -43,7 +43,7 @@ ParameterCheckSchema.statics.getLastParamaterCheck = async function (
   const pc = await this.find({ aquarium: aquariumId }).sort("-createdAt");
   try {
     await this.model("Aquarium").findByIdAndUpdate(aquariumId, {
-      getLastParamaterCheck: {
+      lastParameterCheck: {
         date: pc[0].createdAt,
       },
     });

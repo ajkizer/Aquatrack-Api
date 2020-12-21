@@ -45,7 +45,10 @@ const AquariumSchema = new mongoose.Schema(
         type: Number,
       },
     },
-    lastParametercheck: {
+    lastParameterCheck: {
+      type: Date,
+    },
+    lastMaintenance: {
       type: Date,
     },
     generalMaintenanceReminder: {
@@ -69,6 +72,22 @@ const AquariumSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+AquariumSchema.pre("remove", async function (next) {
+  const models = [
+    "Livestock",
+    "Plant",
+    "MaintenanceTask",
+    "Waterchange",
+    "ParameterCheck",
+  ];
+
+  console.log("Removing all data associated with aquarium...");
+  models.forEach(async (item) => {
+    console.log(`${item} Items Deleted`);
+    await this.model(item).deleteMany({ aquarium: this._id });
+  });
+});
 
 AquariumSchema.virtual("livestock", {
   ref: "Livestock",
