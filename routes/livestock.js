@@ -18,6 +18,7 @@ router
   .get(
     protect,
     advancedResults(Livestock, { path: "aquarium", select: "name size" }),
+
     getLivestock
   )
   .post(protect, addLivestock);

@@ -11,6 +11,7 @@ const User = require("./models/User");
 const Livestock = require("./models/Livestock");
 const Waterchange = require("./models/Waterchange");
 const Plant = require("./models/Plant");
+const ParameterCheck = require("./models/ParameterCheck");
 
 //connect to db
 const conn = mongoose.connect(process.env.MONGO_URI, {
@@ -62,6 +63,7 @@ const deleteData = async () => {
     await Livestock.deleteMany();
     await Waterchange.deleteMany();
     await Plant.deleteMany();
+    await ParameterCheck.deleteMany();
     console.log("DATA DESTROYED!!!");
     process.exit();
   } catch (error) {

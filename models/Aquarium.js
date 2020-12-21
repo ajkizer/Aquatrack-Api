@@ -45,6 +45,9 @@ const AquariumSchema = new mongoose.Schema(
         type: Number,
       },
     },
+    lastParametercheck: {
+      type: Date,
+    },
     generalMaintenanceReminder: {
       type: Number,
       default: 7,
@@ -69,6 +72,13 @@ const AquariumSchema = new mongoose.Schema(
 
 AquariumSchema.virtual("livestock", {
   ref: "Livestock",
+  localField: "_id",
+  foreignField: "aquarium",
+  justOne: false,
+});
+
+AquariumSchema.virtual("plants", {
+  ref: "Plant",
   localField: "_id",
   foreignField: "aquarium",
   justOne: false,

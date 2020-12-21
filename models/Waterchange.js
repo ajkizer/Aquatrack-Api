@@ -28,13 +28,13 @@ const WaterchangeSchema = new mongoose.Schema({
 });
 
 WaterchangeSchema.statics.getLastWaterchange = async function (aquariumId) {
-  const wc = await this.find({ aquarium: aquariumId });
+  const wc = await this.find({ aquarium: aquariumId }).sort("-createdAt");
   try {
     console.log(wc);
     await this.model("Aquarium").findByIdAndUpdate(aquariumId, {
       lastWaterchange: {
-        date: wc[wc.length - 1].createdAt,
-        percentChange: wc[wc.length - 1].percentChange,
+        date: wc[0].createdAt,
+        percentChange: wc[0].percentChange,
       },
     });
   } catch (error) {
