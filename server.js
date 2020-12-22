@@ -19,6 +19,7 @@ const livestock = require("./routes/livestock");
 const waterchanges = require("./routes/waterchanges");
 const plants = require("./routes/plants");
 const parameterChecks = require("./routes/parameterChecks");
+const stats = require("./routes/stats");
 const maintenanceTasks = require("./routes/maintenanceTasks");
 // const users = require("./routes/users");
 // const reviews = require("./routes/reviews");
@@ -81,6 +82,7 @@ app.use("/api/v1/waterchanges", waterchanges);
 app.use("/api/v1/plants", plants);
 app.use("/api/v1/parameters", parameterChecks);
 app.use("/api/v1/maintenanceTasks", maintenanceTasks);
+app.use("/api/v1/stats", stats);
 
 app.use(errorHandler);
 
