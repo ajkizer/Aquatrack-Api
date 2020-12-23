@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const ObjectID = require("mongodb").ObjectID;
 
 const ParameterCheckSchema = new mongoose.Schema({
-  date: {
+  createdAt: {
     type: Date,
     default: Date.now,
   },
@@ -40,12 +41,34 @@ const ParameterCheckSchema = new mongoose.Schema({
 ParameterCheckSchema.statics.getLastParamaterCheck = async function (
   aquariumId
 ) {
-  const pc = await this.find({ aquarium: aquariumId }).sort("-createdAt");
   try {
+    const pc = await this.find({ aquarium: aquariumId }).sort("-createdAt");
     await this.model("Aquarium").findByIdAndUpdate(aquariumId, {
-      lastParameterCheck: {
-        date: pc[0].createdAt,
+      lastParameterCheck: pc[0].createdAt,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+ParameterCheckSchema.statics.getAvgpH = async function (aquariumId) {
+  try {
+    const pH = await this.aggregate([
+      {
+        $match: { aquarium: new ObjectID(aquariumId) },
       },
+      {
+        $group: {
+          _id: "$aquarium",
+          averagepH: { $avg: "$pH" },
+          averageNitrates: { $avg: "$nitrate" },
+        },
+      },
+    ]);
+
+    await this.model("Aquarium").findByIdAndUpdate(aquariumId, {
+      averagepH: pH[0].averagepH,
+      averageNitrates: pH[0].averageNitrates,
     });
   } catch (error) {
     console.error(error);
@@ -54,6 +77,7 @@ ParameterCheckSchema.statics.getLastParamaterCheck = async function (
 
 ParameterCheckSchema.post("save", function () {
   this.constructor.getLastParamaterCheck(this.aquarium);
+  this.constructor.getAvgpH(this.aquarium);
 });
 
 module.exports = mongoose.model("ParameterCheck", ParameterCheckSchema);

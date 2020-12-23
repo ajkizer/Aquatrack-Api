@@ -31,6 +31,12 @@ const AquariumSchema = new mongoose.Schema(
       min: 1,
       max: 30,
     },
+    averagepH: {
+      type: Number,
+    },
+    averageNitrates: {
+      type: Number,
+    },
     parameterCheckReminder: {
       type: Number,
       default: 7,

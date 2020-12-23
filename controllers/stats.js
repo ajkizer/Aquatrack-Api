@@ -3,12 +3,13 @@ const asyncHandler = require("../middleware/asyncHandler");
 const Livestock = require("../models/Livestock");
 const Aquarium = require("../models/Aquarium");
 const MaintenanceTask = require("../models/MaintenanceTask");
+const ParameterCheck = require("../models/ParameterCheck");
 const Plant = require("../models/Plant");
 const Waterchange = require("../models/Waterchange");
 const ObjectID = require("mongodb").ObjectID;
 
 const inventoryCalculators = {
-  inventoryTypeTotal: async (model, aquariumId) => {
+  inventoryTypeTotalSingleAq: async (model, aquariumId) => {
     const inventoryItems = await model.aggregate([
       {
         $match: { aquarium: new ObjectID(aquariumId) },
@@ -31,12 +32,12 @@ const inventoryCalculators = {
 //@access   Private
 
 exports.getAquariumInventoryTotal = asyncHandler(async (req, res, next) => {
-  const livestock = await inventoryCalculators.inventoryTypeTotal(
+  const livestock = await inventoryCalculators.inventoryTypeTotalSingleAq(
     Livestock,
     req.params.aquariumId
   );
 
-  const plants = await inventoryCalculators.inventoryTypeTotal(
+  const plants = await inventoryCalculators.inventoryTypeTotalSingleAq(
     Plant,
     req.params.aquariumId
   );
@@ -80,4 +81,21 @@ exports.getTotalInventory = asyncHandler(async (req, res, next) => {
   const totalInventory = plantTotal + livestockTotal;
 
   res.json({ livestockTotal, plantTotal, totalInventory });
+});
+
+//@desc     Get Average pH for aquarium
+//@route    GET /api/v1/stats/:aquariumId/avgpH
+//@access   Private
+
+exports.getAvgpH = asyncHandler(async (req, res, next) => {
+  const ph = await ParameterCheck.aggregate([
+    {
+      $match: { aquarium: new ObjectID(req.params.aquariumId) },
+    },
+    {
+      $group: { _id: "$_id", avgpH: { $avg: "$pH" } },
+    },
+  ]);
+
+  res.json(ph);
 });
