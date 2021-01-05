@@ -9,19 +9,22 @@ const ParameterCheck = require("../models/ParameterCheck");
 //@access   Private
 
 exports.getParamCheck = asyncHandler(async (req, res, next) => {
-  let parameterCheck;
-  if (req.params.aquariumId) {
-    parameterCheck = await ParameterCheck.find({
-      aquarium: req.params.aquariumId,
-      user: req.user.id,
-    });
-    return res.status(200).json({
-      success: true,
-      data: parameterCheck,
-    });
-  } else {
-    res.status(200).json(res.advancedResults);
-  }
+  // let parameterCheck;
+  // if (req.params.aquariumId) {
+  //   let limit;
+  //   if (req.query.limit) {
+  //     limit = JSON.parse(req.query.limit);
+  //   }
+  //   parameterCheck = await ParameterCheck.find({
+  //     aquarium: req.params.aquariumId,
+  //     user: req.user.id,
+  //   }).limit(limit);
+  //   return res.status(200).json({
+  //     success: true,
+  //     data: parameterCheck,
+  //   });
+
+  res.status(200).json(res.advancedResults);
 });
 
 //@desc     Get parameter check by ID

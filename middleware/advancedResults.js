@@ -1,7 +1,11 @@
 const advancedResults = (model, populate) => async (req, res, next) => {
   let query;
 
+  let additionalFilter;
+
   const reqQuery = { ...req.query };
+
+  console.log({ reqQuery });
 
   //Fields to exclude
   const removeFields = ["select", "sort", "page", "limit"];
@@ -10,14 +14,24 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   removeFields.forEach((param) => delete reqQuery[param]);
 
   let queryStr = JSON.stringify(reqQuery);
-  console.log(queryStr);
+
   queryStr = queryStr.replace(
     /\b(gt|gte|lt|lte|in)\b/g,
     (match) => `$${match}`
   );
 
-  query = model.find(JSON.parse(queryStr));
-
+  if (req.params.aquariumId) {
+    query = model.find({
+      user: req.user.id,
+      aquarium: req.params.aquariumId,
+      ...JSON.parse(queryStr),
+    });
+  } else {
+    query = model.find({
+      user: req.user.id,
+      ...JSON.parse(queryStr),
+    });
+  }
   //select fields
   if (req.query.select) {
     const fields = req.query.select.split(",").join(" ");
@@ -35,14 +49,22 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   const limit = parseInt(req.query.limit, 10) || 100;
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
-  const total = await model.countDocuments();
+
+  let total;
+
+  if (req.params.aquariumId) {
+    total = await model.countDocuments({
+      aquarium: req.params.aquariumId,
+    });
+  } else {
+    total = await model.countDocuments();
+  }
 
   query = query.skip(startIndex).limit(limit);
 
   if (populate) {
     query = query.populate(populate);
   }
-
   const results = await query;
 
   //pagination result

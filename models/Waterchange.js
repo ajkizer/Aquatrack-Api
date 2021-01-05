@@ -5,6 +5,7 @@ const WaterchangeSchema = new mongoose.Schema({
     type: Number,
     min: 5,
     max: 100,
+    enum: [5, 10, 20, 25, 30, 40, 50, 75, 90],
     required: [true, "Please provide the percent of water changed"],
   },
   aquarium: {
@@ -32,10 +33,7 @@ WaterchangeSchema.statics.getLastWaterchange = async function (aquariumId) {
   try {
     console.log(wc);
     await this.model("Aquarium").findByIdAndUpdate(aquariumId, {
-      lastWaterchange: {
-        date: wc[0].createdAt,
-        percentChange: wc[0].percentChange,
-      },
+      lastWaterchange: wc[0].createdAt,
     });
   } catch (error) {
     console.error(error);

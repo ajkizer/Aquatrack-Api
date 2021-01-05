@@ -9,19 +9,19 @@ const Aquarium = require("../models/Aquarium");
 //@access   Private
 
 exports.getLivestock = asyncHandler(async (req, res, next) => {
-  let livestock;
-  if (req.params.aquariumId) {
-    livestock = await Livestock.find({
-      aquarium: req.params.aquariumId,
-      user: req.user.id,
-    });
-    return res.status(200).json({
-      success: true,
-      data: livestock,
-    });
-  } else {
-    res.status(200).json(res.advancedResults);
-  }
+  // let livestock;
+  // if (req.params.aquariumId) {
+  //   livestock = await Livestock.find({
+  //     aquarium: req.params.aquariumId,
+  //     user: req.user.id,
+  //   });
+  //   return res.status(200).json({
+  //     success: true,
+  //     data: livestock,
+  //   });
+  // } else {
+  res.status(200).json(res.advancedResults);
+  // }
 });
 
 //@desc     Get livestock by ID
@@ -91,6 +91,8 @@ exports.updateLivestock = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`No livestock with the id of ${req.params.id}`)
     );
   }
+
+  console.log(livestock);
 
   if (livestock.user.toString() !== req.user.id) {
     return next(

@@ -9,19 +9,18 @@ const MaintenanceTask = require("../models/MaintenanceTask");
 //@access   Private
 
 exports.getMaintenanceTasks = asyncHandler(async (req, res, next) => {
-  let maintenanceTasks;
-  if (req.params.aquariumId) {
-    maintenanceTasks = await MaintenanceTask.find({
-      aquarium: req.params.aquariumId,
-      user: req.user.id,
-    });
-    return res.status(200).json({
-      success: true,
-      data: maintenanceTasks,
-    });
-  } else {
-    res.status(200).json(res.advancedResults);
-  }
+  // let maintenanceTasks;
+  // if (req.params.aquariumId) {
+  //   maintenanceTasks = await MaintenanceTask.find({
+  //     aquarium: req.params.aquariumId,
+  //     user: req.user.id,
+  //   });
+  //   return res.status(200).json({
+  //     success: true,
+  //     data: maintenanceTasks,
+  //   });
+  // } else {
+  res.status(200).json(res.advancedResults);
 });
 
 //@desc     Get maintenance tasks by ID

@@ -26,6 +26,10 @@ const ParameterCheckSchema = new mongoose.Schema({
     enum: [6.0, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4, 7.6, 7.8, 8.0, 8.2, 8.4, 8.8],
     required: true,
   },
+  notes: {
+    type: String,
+    maxlength: [500, "Note must be less than 500 characters"],
+  },
   aquarium: {
     type: mongoose.Schema.ObjectId,
     ref: "Aquarium",

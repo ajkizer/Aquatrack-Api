@@ -5,14 +5,14 @@ const User = require("../models/User");
 
 //Protect Routes
 exports.protect = asyncHandler(async (req, res, next) => {
-  let token;
+  let token = req.header("x-auth-token");
 
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  }
+  // if (
+  //   req.headers.authorization &&
+  //   req.headers.authorization.startsWith("Bearer")
+  // ) {
+  //   token = req.headers.authorization.split(" ")[1];
+  // }
   //  else if (req.cookies.token) {
   //   token = req.cookies.token;
   // }

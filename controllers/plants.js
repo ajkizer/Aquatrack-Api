@@ -9,19 +9,19 @@ const Aquarium = require("../models/Aquarium");
 //@access   Private
 
 exports.getPlants = asyncHandler(async (req, res, next) => {
-  let plants;
-  if (req.params.aquariumId) {
-    plants = await Plant.find({
-      aquarium: req.params.aquariumId,
-      user: req.user.id,
-    });
-    return res.status(200).json({
-      success: true,
-      data: plants,
-    });
-  } else {
-    res.status(200).json(res.advancedResults);
-  }
+  // let plants;
+  // if (req.params.aquariumId) {
+  //   plants = await Plant.find({
+  //     aquarium: req.params.aquariumId,
+  //     user: req.user.id,
+  //   });
+  //   return res.status(200).json({
+  //     success: true,
+  //     data: plants,
+  //   });
+  // } else {
+  res.status(200).json(res.advancedResults);
+  // }
 });
 
 //@desc     Get plants by ID

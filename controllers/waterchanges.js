@@ -9,19 +9,19 @@ const Waterchange = require("../models/Waterchange");
 //@access   Private
 
 exports.getWaterchanges = asyncHandler(async (req, res, next) => {
-  let waterchange;
-  if (req.params.aquariumId) {
-    waterchange = await Waterchange.find({
-      aquarium: req.params.aquariumId,
-      user: req.user.id,
-    });
-    return res.status(200).json({
-      success: true,
-      data: waterchange,
-    });
-  } else {
-    res.status(200).json(res.advancedResults);
-  }
+  // let waterchange;
+  // if (req.params.aquariumId) {
+  //   waterchange = await Waterchange.find({
+  //     aquarium: req.params.aquariumId,
+  //     user: req.user.id,
+  //   });
+  //   return res.status(200).json({
+  //     success: true,
+  //     data: waterchange,
+  //   });
+  // } else {
+  res.status(200).json(res.advancedResults);
+  // }
 });
 
 //@desc     Get waterchange by ID

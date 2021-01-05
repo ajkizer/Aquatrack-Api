@@ -44,18 +44,16 @@ const AquariumSchema = new mongoose.Schema(
       max: 30,
     },
     lastWaterchange: {
-      date: {
-        type: Date,
-      },
-      percentChange: {
-        type: Number,
-      },
+      type: Date,
+      default: "",
     },
     lastParameterCheck: {
       type: Date,
+      default: "",
     },
     lastMaintenance: {
       type: Date,
+      default: "",
     },
     generalMaintenanceReminder: {
       type: Number,
