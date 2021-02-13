@@ -10,9 +10,7 @@ const rateLimit = require("express-rate-limit");
 const hpp = require("hpp");
 const cors = require("cors");
 const mongoSanitize = require("express-mongo-sanitize");
-//Route files
-// const bootcamps = require("./routes/bootcamps");
-// const courses = require("./routes/courses");
+
 const aquariums = require("./routes/aquariums");
 const auth = require("./routes/auth");
 const livestock = require("./routes/livestock");
@@ -21,8 +19,6 @@ const plants = require("./routes/plants");
 const parameterChecks = require("./routes/parameterChecks");
 const stats = require("./routes/stats");
 const maintenanceTasks = require("./routes/maintenanceTasks");
-// const users = require("./routes/users");
-// const reviews = require("./routes/reviews");
 
 const errorHandler = require("./middleware/error");
 
